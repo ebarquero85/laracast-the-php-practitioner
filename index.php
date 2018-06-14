@@ -1,37 +1,12 @@
 <?php
 
-require('functions.php');
+ini_set('display_errors', '1');
+
+$database = require 'core/bootstrap.php';
 
 
-class Task{
+$url = trim($_SERVER['REQUEST_URI'],'/');
 
-    protected $completed = false;
+require Router::load('routes.php')->direct($url);
 
-    public $description;
 
-    public function __construct($description)
-    {
-        $this->description = $description;
-    }
-
-    public function complete(){
-        $this->completed = true;
-    }
-
-    public function isCompleted()
-    {
-        return $this->completed;
-    }
-
-}
-
-$tasks = [
-    new Task('Estudiar programación'),
-    new Task('Ir a trabajar'),
-    new Task('Comprar comida')
-];
-
-$tasks[0]->complete();
-$tasks[2]->complete();
-
-require 'index.view.php';
