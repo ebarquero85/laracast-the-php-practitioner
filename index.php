@@ -1,20 +1,37 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+<?php
 
-    <h1>
+require('functions.php');
 
-        <?php
 
-            echo "Hola, " . htmlspecialchars($_GET['name']);
+class Task{
 
-        ?>
+    protected $completed = false;
 
-    </h1>
+    public $description;
 
-</body>
-</html>
+    public function __construct($description)
+    {
+        $this->description = $description;
+    }
+
+    public function complete(){
+        $this->completed = true;
+    }
+
+    public function isCompleted()
+    {
+        return $this->completed;
+    }
+
+}
+
+$tasks = [
+    new Task('Estudiar programación'),
+    new Task('Ir a trabajar'),
+    new Task('Comprar comida')
+];
+
+$tasks[0]->complete();
+$tasks[2]->complete();
+
+require 'index.view.php';
