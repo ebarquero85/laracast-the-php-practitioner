@@ -9,7 +9,9 @@ class Router
 
         $routes = new static;
 
-        require $file;
+        $arreglo = require $file;
+
+        $routes->register($arreglo);
 
         return $routes;
 
@@ -26,7 +28,7 @@ class Router
             return $this->routes[$url];
         }
 
-        throw new Exception('No routes define for this URL');
+        throw new Exception('No se encontro la ruta');
 
     }
 

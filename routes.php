@@ -1,10 +1,11 @@
 <?php
 
-$routes->register([
+return [
     '' => 'controllers/index.php',
     'about' => 'controllers/about.php',
-    'contact' => 'controllers/contact.php'
-]);
+    'contact' => 'controllers/contact.php',
+    'history' => 'controllers/history.php'
+];
 
 
 
