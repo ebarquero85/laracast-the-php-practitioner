@@ -3,15 +3,16 @@
 class Router
 {
 
-    protected $routes = [];
+    public $routes = [
+        'GET' => [],
+        'POST' => []
+    ];
 
     public static function load($file){
 
         $routes = new static;
 
-        $arreglo = require $file;
-
-        $routes->register($arreglo);
+        require $file;
 
         return $routes;
 
@@ -22,13 +23,26 @@ class Router
         $this->routes = $routes;
     }
 
-    public function direct($url){
+    public function get($url, $controller){
 
-        if(array_key_exists($url, $this->routes)){
-            return $this->routes[$url];
+        $this->routes['GET'][$url] = $controller;
+
+    }
+
+    public function post($url, $controller){
+
+        $this->routes['POST'][$url] = $controller;
+
+    }
+
+    public function direct($url, $requestType){
+
+        if(array_key_exists($url, $this->routes[$requestType])){
+            return $this->routes[$requestType][$url];
         }
 
-        throw new Exception('No se encontro la ruta');
+        //throw new Exception('Nooooo se encontro la ruta');
+        die('Se se encontro la ruta solicitada');
 
     }
 
