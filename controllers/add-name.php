@@ -1,6 +1,10 @@
 <?php
 
-//var_dump($_SERVER);
 
+$app['database']->insert('users',[
+    'name' => $_POST['name'],
+    //'email' => $_POST['email'],
+]);
 
-var_dump($_REQUEST);
+//var_dump($_REQUEST);
+header('Location: /');

@@ -19,4 +19,27 @@ class QueryBuilder
 
     }
 
+    public function insert($table, $parameters)
+    {
+
+        $sql = sprintf('INSERT INTO %s(%s) VALUES (%s)',
+            $table,
+            implode(', ', array_keys($parameters)),
+            ':' . implode(', :', array_keys($parameters))
+        );
+
+        try{
+
+            $statement = $this->pdo->prepare($sql);
+            $statement->execute($parameters);
+
+        }catch (Exception $e){
+
+            die($e->getMessage());
+
+        }
+
+
+    }
+
 }
