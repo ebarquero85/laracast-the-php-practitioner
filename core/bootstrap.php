@@ -1,5 +1,7 @@
 <?php
 
+use App\Core\App;
+
 App::bind('config', require 'config.php');
 
 App::bind('database',
@@ -9,7 +11,9 @@ App::bind('database',
 
 function view($name, $data = []){
 
-    extract($data);
+    if (!empty($data)) {
+        extract($data);
+    }
 
     require "./views/$name.view.php";
 

@@ -1,5 +1,7 @@
 <?php
 
+namespace App\Controllers;
+
 
 class PagesController
 {
@@ -7,26 +9,26 @@ class PagesController
     public function home()
     {
 
-        require view('index');
+        view('index');
     }
 
     public function about()
     {
         $us = 'Barqueros Company';
 
-        require view('about', [
+        view('about', [
             'us' => $us
         ]);
     }
 
     public function contact()
     {
-        require view('contact');
+        view('contact');
     }
 
     public function history()
     {
-        require view('history');
+        view('history');
     }
 
 

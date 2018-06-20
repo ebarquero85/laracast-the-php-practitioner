@@ -1,5 +1,8 @@
 <?php
 
+namespace App\Controllers;
+
+use App\Core\App;
 
 class UsersController
 {
@@ -8,7 +11,7 @@ class UsersController
 
         $users = App::get('database')->selectAll('users');
 
-        return view('users', [
+        view('users', [
             'users' => $users
         ]);
 
@@ -22,7 +25,7 @@ class UsersController
             'name' => $_POST['name'],
         ]);
 
-        return redirect('users');
+        redirect('users');
 
     }
 
