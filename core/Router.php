@@ -8,7 +8,8 @@ class Router
         'POST' => []
     ];
 
-    public static function load($file){
+    public static function load($file)
+    {
 
         $routes = new static;
 
@@ -18,31 +19,41 @@ class Router
 
     }
 
-    public function register($routes)
+    public function get($url, $controller)
     {
-        $this->routes = $routes;
-    }
-
-    public function get($url, $controller){
-
         $this->routes['GET'][$url] = $controller;
-
     }
 
-    public function post($url, $controller){
-
+    public function post($url, $controller)
+    {
         $this->routes['POST'][$url] = $controller;
-
     }
 
-    public function direct($url, $requestType){
+    public function direct($url, $requestType)
+    {
 
-        if(array_key_exists($url, $this->routes[$requestType])){
+        if (array_key_exists($url, $this->routes[$requestType])) {
+
+            $this->callAction(
+                ...explode('@', $this->routes[$requestType][$url])
+            );
+
             return $this->routes[$requestType][$url];
+
         }
 
-        //throw new Exception('Nooooo se encontro la ruta');
         die('Se se encontro la ruta solicitada');
+
+    }
+
+    public function callAction($controller, $action)
+    {
+
+        if (!method_exists($controller, $action)) {
+            die("El {$controller} no contiene el método {$action}");
+        }
+
+        return (new $controller)->$action();
 
     }
 
