@@ -32,6 +32,8 @@ class Router
     public function direct($url, $requestType)
     {
 
+        //die(var_dump($this->routes));
+
         if (array_key_exists($url, $this->routes[$requestType])) {
 
             $this->callAction(

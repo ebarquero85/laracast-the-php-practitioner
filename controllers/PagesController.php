@@ -6,14 +6,17 @@ class PagesController
 
     public function home()
     {
-        $users = App::get('database')->selectAll('users');
 
         require view('index');
     }
 
     public function about()
     {
-        require view('about');
+        $us = 'Barqueros Company';
+
+        require view('about', [
+            'us' => $us
+        ]);
     }
 
     public function contact()
@@ -24,17 +27,6 @@ class PagesController
     public function history()
     {
         require view('history');
-    }
-
-    public function addname()
-    {
-
-        App::get('database')->insert('users',[
-            'name' => $_POST['name'],
-        ]);
-
-        header('Location: /');
-
     }
 
 

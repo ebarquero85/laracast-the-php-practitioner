@@ -7,8 +7,17 @@ App::bind('database',
 );
 
 
-function view($name){
+function view($name, $data = []){
 
-    return "./views/$name.view.php";
+    extract($data);
+
+    require "./views/$name.view.php";
+
+}
+
+
+function redirect($path){
+
+    header("Location: /{$path}");
 
 }
